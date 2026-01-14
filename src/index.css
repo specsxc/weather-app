@@ -1,0 +1,46 @@
+:root {
+  /* Kolory - wpisz tu wartości HEX, które odczytałeś w panelu "Fill" */
+  --primary-color: #10a95b;
+  --bg-color: #282726;
+  --text-color: #ffffff;
+  --accent-color: #fbbf24;
+
+  /* Odstępy i zaokrąglenia - wartości z Twoich zdjęć */
+  --main-gap: 36px;
+  --main-padding: 73px 57px;
+  --radius-md: 8px;
+
+  /* Fonty */
+  --font-main: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* 2. RESET I USTAWIENIA GLOBALNE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Kluczowe: padding nie powiększa elementów */
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased; /* Wygładzanie czcionek */
+}
+
+/* 3. POMOCNICZE KLASY (Opcjonalnie) */
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}

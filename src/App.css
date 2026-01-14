@@ -1,0 +1,25 @@
+.container {
+  padding: var(--main-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--main-gap);
+}
+
+.card {
+  background-color: #333231; /* Kolor o ton jaśniejszy od tła */
+  padding: 20px;
+  border-radius: var(--radius-md);
+}
+
+.primary-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  margin-top: 10px;
+  transition: opacity 0.2s;
+}
+
+.primary-btn:hover {
+  opacity: 0.8;
+}
