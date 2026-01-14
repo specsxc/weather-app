@@ -1,15 +1,119 @@
-.container {
-  padding: var(--main-padding);
-  display: flex;
-  flex-direction: column;
-  gap: var(--main-gap);
+/* Root */
+
+.grid-container {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-areas:
+    "sidebar main"
+    "sidebar main"
+    "sidebar main";
 }
 
-.card {
-  background-color: #333231; /* Kolor o ton jaśniejszy od tła */
-  padding: 20px;
-  border-radius: var(--radius-md);
+/* Sidebar */
+
+.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  padding: 35px 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--sidebar-color);
 }
+
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  align-items: center;
+}
+
+.homeButton {
+  padding: 10px;
+  border-radius: 15px;
+  background-color: var(--primary-color);
+}
+
+.sidebar-home {
+  font-size: 1.5rem;
+}
+
+.sidebar-icon {
+  font-size: 1.1rem;
+}
+
+.sidebar-icon,
+.sidebar-home {
+  color: var(--text-color);
+}
+
+/* Main */
+
+main {
+  background-color: var(--bg-color);
+  grid-area: main;
+  display: flex;
+  justify-content: center;
+}
+.homeView {
+  flex-grow: 1;
+  max-width: 600px;
+}
+
+.savedCitiesText {
+  color: var(--text-color-dark);
+  margin-bottom: 20px;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+/* Search Bar */
+
+.search-box {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  background-color: #1e293b;
+  border: 1px solid var(--text-color-dark);
+  border-radius: 25px;
+  margin: 50px 0;
+  font-family: inherit;
+}
+
+/* City */
+
+.city {
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--container-color);
+  padding: 0 35px;
+}
+
+.weatherCurrent {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Button */
 
 .primary-btn {
   background-color: var(--primary-color);

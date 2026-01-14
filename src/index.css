@@ -1,24 +1,26 @@
 :root {
-  /* Kolory - wpisz tu wartości HEX, które odczytałeś w panelu "Fill" */
-  --primary-color: #10a95b;
-  --bg-color: #282726;
+  /* Colors */
+  --primary-color: #2b8cee;
+  --bg-color-light: #f8fafc;
+  --bg-color: #0f172a;
+  --container-color: #1e293b;
   --text-color: #ffffff;
+  --text-color-dark: #708090;
   --accent-color: #fbbf24;
+  --sidebar-color: #0b1222;
 
-  /* Odstępy i zaokrąglenia - wartości z Twoich zdjęć */
-  --main-gap: 36px;
-  --main-padding: 73px 57px;
+  /* Gap & Padding */
   --radius-md: 8px;
 
-  /* Fonty */
-  --font-main: "Inter", system-ui, -apple-system, sans-serif;
+  /* Font */
+  --font-main: "Space Grotesk", system-ui, -apple-system, sans-serif;
 }
 
-/* 2. RESET I USTAWIENIA GLOBALNE */
+/* 2. Reset */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Kluczowe: padding nie powiększa elementów */
+  box-sizing: border-box;
 }
 
 html,
@@ -28,10 +30,9 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-main);
-  -webkit-font-smoothing: antialiased; /* Wygładzanie czcionek */
 }
 
-/* 3. POMOCNICZE KLASY (Opcjonalnie) */
+/* 3. Classes */
 img,
 svg {
   display: block;
