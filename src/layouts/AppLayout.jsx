@@ -5,7 +5,9 @@ export default function AppLayout() {
   return (
     <div className="grid-container">
       <Sidebar />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 }

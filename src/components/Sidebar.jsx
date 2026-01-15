@@ -15,10 +15,10 @@ export default function Sidebar() {
         <NavLink to="/" className="homeButton">
           <FontAwesomeIcon icon={faCloud} className="sidebar-home" />
         </NavLink>
-        <NavLink to="/home">
+        <NavLink to="/">
           <FontAwesomeIcon icon={faHouse} className="sidebar-icon" />
         </NavLink>
-        <NavLink to="/details">
+        <NavLink to="/favourites">
           <FontAwesomeIcon icon={faHeart} className="sidebar-icon" />
         </NavLink>
       </div>

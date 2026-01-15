@@ -49,7 +49,7 @@
   color: var(--text-color);
 }
 
-/* Main */
+/* Home */
 
 main {
   background-color: var(--bg-color);
@@ -57,9 +57,16 @@ main {
   display: flex;
   justify-content: center;
 }
-.homeView {
+
+.homeView,
+.section {
   flex-grow: 1;
   max-width: 600px;
+}
+
+.details-view {
+  flex-grow: 1;
+  max-width: 900px;
 }
 
 .savedCitiesText {
@@ -90,10 +97,12 @@ main {
   width: 100%;
   padding: 15px 15px 15px 45px;
   background-color: #1e293b;
+  color: var(--text-color-light);
   border: 1px solid var(--text-color-dark);
   border-radius: 25px;
   margin: 50px 0;
   font-family: inherit;
+  font-size: 1rem;
 }
 
 /* City */
@@ -107,13 +116,126 @@ main {
   padding: 0 35px;
 }
 
+.country-code {
+  font-size: 0.75rem;
+  color: var(--text-color-medium);
+}
+
 .weatherCurrent {
   display: flex;
   gap: 15px;
   align-items: center;
 }
 
-/* Button */
+.weatherCurrent span {
+  color: var(--text-color-light);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* NavLink Home -> Details */
+
+.cityDetails {
+  text-decoration: none;
+  color: var(--text-color-light);
+}
+
+/*  Details */
+
+.header-container {
+  color: var(--text-color-light);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35px;
+  margin-bottom: 50px;
+}
+
+.details-container span {
+  margin-left: 5px;
+}
+
+.location-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.location-icon {
+  color: #45b1e8;
+  font-size: 2rem;
+}
+
+.weather-details {
+  background-color: var(--container-color);
+  border-radius: 25px;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.box-weather {
+  background-color: #19233d;
+  border-radius: 15px;
+  padding: 25px 25px;
+  margin: 25px 0;
+}
+
+.temp-details {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.info-details {
+  font-size: 1rem;
+}
+
+.temp-details h2 {
+  font-size: 5rem;
+}
+
+.weather-temp-icon {
+  width: 200px;
+}
+
+.weather-status {
+  color: #a4adb0;
+  letter-spacing: 1px;
+}
+
+.box-weather {
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+}
+
+.forecast-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 35px 0;
+}
+
+.forecast-expect {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #a4adb0;
+}
+
+.forecast-day {
+  background-color: (--container-color);
+}
+
+/* Buttons */
+
+.favourites-button {
+  padding: 15px 20px;
+  background-color: #1e293b;
+  border: 1px solid var(--text-color-dark);
+  border-radius: 25px;
+  align-self: center;
+  color: var(--text-color-light);
+}
 
 .primary-btn {
   background-color: var(--primary-color);
