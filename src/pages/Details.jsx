@@ -20,20 +20,9 @@ export default function Details(props) {
     const index = Math.round(deg / 45) % 8;
     return directions[index];
   }
-  // function changeTimestamp(timestamp) {
-  //   if (timestamp) {
-  //     const offset = 3600;
-  //     const day = new Date((timestamp + offset) * 1000).toLocaleDateString(
-  //       "en-us",
-  //       {
-  //         weekday: "short",
-  //       }
-  //     );
-  //     return day;
-  //   }
-  // }
-
-  console.log(props.weather);
+  if (!props.weather || !props.weather.dailyWeather) {
+    return <div className="loading">Pobieranie prognozy...</div>;
+  }
 
   return (
     <>
@@ -84,21 +73,29 @@ export default function Details(props) {
             <p>5-Day Forecast</p>
             <p className="forecast-expect">Expected Conditions</p>
           </div>
-
-          <div className="forecast-day">
-            {/* {changeTimestamp(props.weather.dailyWeather[0].dt)} */}
+          <div className="forecast-flex">
+            {props.weather.dailyWeather.slice(1, 6).map((day, index) => (
+              <div key={index} className="forecast-day">
+                {new Date(day.dt * 1000).toLocaleDateString("en-US", {
+                  weekday: "short",
+                })}
+                <img
+                  src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                />
+                <div className="forecast-min-max">
+                  <h3>{Math.floor(day.temp.max)}&deg;C</h3>
+                  <p>{Math.floor(day.temp.min)}&deg;C</p>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="forecast-day">
-            {/* {changeTimestamp(props.weather.dailyWeather[1].dt)} */}
-          </div>
-          <div className="forecast-day">
-            {/* {changeTimestamp(props.weather.dailyWeather[2].dt)} */}
-          </div>
-          <div className="forecast-day">
-            {/* {changeTimestamp(props.weather.dailyWeather[3].dt)} */}
-          </div>
-          <div className="forecast-day">
-            {/* {changeTimestamp(props.weather.dailyWeather[4].dt)} */}
+          <div className="footer-line">
+            <p>Weather app</p>
+            <p>
+              <a href="openweathermap.org/api/one-call-3">
+                OpenWeather One Call 3.0
+              </a>
+            </p>
           </div>
         </div>
       </div>
