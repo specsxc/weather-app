@@ -7,8 +7,10 @@ import Settings from "./pages/Settings";
 import { useEffect, useState } from "react";
 import Favourites from "./pages/Favourites";
 import getWeatherData from "./services/getWeatherData";
+import { useSelector } from "react-redux";
 
 export default function App() {
+  const unitSystem = useSelector((state) => state.units.system);
   const [location, setLocation] = useState({ city: "warsaw" });
   const [weather, setWeather] = useState("");
 
@@ -19,13 +21,13 @@ export default function App() {
       return;
     }
     const fetchAll = async () => {
-      const data = await getWeatherData(location, API_KEY);
+      const data = await getWeatherData(location, API_KEY, unitSystem);
       if (data) {
         setWeather(data);
       }
     };
     fetchAll();
-  }, [location, API_KEY]);
+  }, [location, API_KEY, unitSystem]);
 
   return (
     <div className="grid-container">

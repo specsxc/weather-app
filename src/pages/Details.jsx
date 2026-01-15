@@ -1,8 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faHeart } from "@fortawesome/free-solid-svg-icons";
 import "../App.css";
+import { useSelector } from "react-redux";
 
 export default function Details(props) {
+  const unitSystem = useSelector((state) => state.units.system);
+
   const date = new Date();
 
   const currentDate = date.toLocaleDateString("en-us", {
@@ -23,6 +26,12 @@ export default function Details(props) {
   if (!props.weather || !props.weather.dailyWeather) {
     return <div className="loading">Pobieranie prognozy...</div>;
   }
+
+  const symbols = {
+    metric: "°C",
+    imperial: "°F",
+    standard: "K",
+  };
 
   return (
     <>
@@ -49,7 +58,10 @@ export default function Details(props) {
               src={`https://openweathermap.org/img/wn/${props.weather.weatherIcon}@2x.png`}
             />
             <div>
-              <h2>{Math.floor(props.weather.currentTemp)}&deg;C</h2>
+              <h2>
+                {Math.floor(props.weather.currentTemp)}&deg;C
+                {symbols[unitSystem]}
+              </h2>
               <p className="weather-status">{props.weather.weatherStatus}</p>
             </div>
           </div>

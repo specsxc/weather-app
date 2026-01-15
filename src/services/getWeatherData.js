@@ -1,4 +1,4 @@
-export default async function getWeatherData(location, api) {
+export default async function getWeatherData(location, api, units = "metric") {
   try {
     const res = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${location.city}&appid=${api}`
@@ -15,7 +15,7 @@ export default async function getWeatherData(location, api) {
 
     if (longitude && latitude) {
       const res2 = await fetch(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude=minutely,hourly&lang=pl&appid=${api}`
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=${units}&exclude=minutely,hourly&lang=pl&appid=${api}`
       );
       if (!res2.ok) {
         console.log(res2.status);

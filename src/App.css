@@ -266,6 +266,30 @@ main {
   color: #a4adb0;
 }
 
+/* Settings */
+
+.unit-controls {
+  margin-top: 100px;
+  color: white;
+}
+
+.unit-controls button {
+  color: white;
+  background-color: var(--text-color-dark);
+  margin: 15px;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.settings-icon {
+  font-size: 1.1rem;
+  color: #45b1e8;
+}
+
+.active {
+  color: white;
+}
+
 /* Buttons */
 
 .favourites-button {
