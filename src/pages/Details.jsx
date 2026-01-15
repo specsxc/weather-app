@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faHeart } from "@fortawesome/free-solid-svg-icons";
 import "../App.css";
 import { useSelector } from "react-redux";
+import Footer from "../components/Footer";
 
 export default function Details(props) {
   const unitSystem = useSelector((state) => state.units.system);
@@ -23,6 +24,7 @@ export default function Details(props) {
     const index = Math.round(deg / 45) % 8;
     return directions[index];
   }
+
   if (!props.weather || !props.weather.dailyWeather) {
     return <div className="loading">Pobieranie prognozy...</div>;
   }
@@ -30,7 +32,7 @@ export default function Details(props) {
   const symbols = {
     metric: "°C",
     imperial: "°F",
-    standard: "K",
+    standard: " K",
   };
 
   return (
@@ -59,7 +61,7 @@ export default function Details(props) {
             />
             <div>
               <h2>
-                {Math.floor(props.weather.currentTemp)}&deg;C
+                {Math.floor(props.weather.currentTemp)}
                 {symbols[unitSystem]}
               </h2>
               <p className="weather-status">{props.weather.weatherStatus}</p>
@@ -95,20 +97,19 @@ export default function Details(props) {
                   src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
                 />
                 <div className="forecast-min-max">
-                  <h3>{Math.floor(day.temp.max)}&deg;C</h3>
-                  <p>{Math.floor(day.temp.min)}&deg;C</p>
+                  <h3>
+                    {Math.floor(day.temp.max)}
+                    {symbols[unitSystem]}
+                  </h3>
+                  <p>
+                    {Math.floor(day.temp.min)}
+                    {symbols[unitSystem]}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="footer-line">
-            <p>Weather app</p>
-            <p>
-              <a href="openweathermap.org/api/one-call-3">
-                OpenWeather One Call 3.0
-              </a>
-            </p>
-          </div>
+          <Footer />
         </div>
       </div>
     </>

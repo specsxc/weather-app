@@ -2,8 +2,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../App.css";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Home({ weather, location, setLocation }) {
+  const unitSystem = useSelector((state) => state.units.system);
+
+  const symbols = {
+    metric: "°C",
+    imperial: "°F",
+    standard: " K",
+  };
+
   if (weather) {
     console.log(weather);
   }
@@ -47,7 +56,10 @@ export default function Home({ weather, location, setLocation }) {
               <img
                 src={`https://openweathermap.org/img/wn/${weather.weatherIcon}@2x.png`}
               />
-              <span>{Math.floor(weather.currentTemp)}&deg;C</span>
+              <span>
+                {Math.floor(weather.currentTemp)}
+                {symbols[unitSystem]}
+              </span>
             </p>
           </div>
         </NavLink>
