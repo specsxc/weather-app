@@ -5,13 +5,13 @@ import Home from "./pages/Home";
 import Details from "./pages/Details";
 import Settings from "./pages/Settings";
 import { useEffect, useState } from "react";
-import Favourites from "./pages/Favourites";
+import Favourites from "./pages/Favorites";
 import getWeatherData from "./services/getWeatherData";
 import { useSelector } from "react-redux";
 
 export default function App() {
   const unitSystem = useSelector((state) => state.units.system);
-  const [location, setLocation] = useState({ city: "warsaw" });
+  const [location, setLocation] = useState({ city: "" });
   const [weather, setWeather] = useState("");
 
   const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
@@ -43,8 +43,16 @@ export default function App() {
               />
             }
           />
-          <Route path="/favourites" element={<Favourites />} />
-          <Route path="/details" element={<Details weather={weather} />} />
+          <Route
+            path="/favourites"
+            element={<Favourites setLocation={setLocation} />}
+          />
+          <Route
+            path="/details"
+            element={
+              <Details weather={weather} getWeatherData={getWeatherData} />
+            }
+          />
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>

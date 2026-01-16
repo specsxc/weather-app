@@ -1,11 +1,42 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faHeart } from "@fortawesome/free-solid-svg-icons";
-import "../App.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite } from "../store/favoritesSlice";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-export default function Details(props) {
+export default function Details({ weather, getWeatherData }) {
+  const location = useLocation();
+  const cityFromFavorites = location.state?.cityName;
+
+  const api = import.meta.env.VITE_WEATHER_API_KEY;
+
   const unitSystem = useSelector((state) => state.units.system);
+
+  const dispatch = useDispatch();
+
+  const favorites = useSelector((state) => state.favorites.items);
+
+  const isFavorite = weather ? favorites.includes(weather.name) : false;
+
+  useEffect(() => {
+    if (cityFromFavorites && weather?.name !== cityFromFavorites) {
+      getWeatherData({ city: cityFromFavorites }, api, unitSystem);
+    }
+  }, [cityFromFavorites, getWeatherData, weather?.name, api, unitSystem]);
+
+  const handleFavoriteClick = () => {
+    if (weather && weather.name) {
+      dispatch(toggleFavorite(weather.name));
+    } else {
+      console.error("Error: Data not loaded!");
+    }
+  };
+
+  if (!weather || !weather.dailyWeather) {
+    return <div className="loading">Fetching weather...</div>;
+  }
 
   const date = new Date();
 
@@ -15,25 +46,17 @@ export default function Details(props) {
     month: "long",
   });
 
-  // const currentTime = date.toLocaleTimeString("en-us", {
-  //   timeStyle: "short",
-  // });
+  const symbols = {
+    metric: "°C",
+    imperial: "°F",
+    standard: " K",
+  };
 
   function windDirection(deg) {
     const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
     const index = Math.round(deg / 45) % 8;
     return directions[index];
   }
-
-  if (!props.weather || !props.weather.dailyWeather) {
-    return <div className="loading">Pobieranie prognozy...</div>;
-  }
-
-  const symbols = {
-    metric: "°C",
-    imperial: "°F",
-    standard: " K",
-  };
 
   return (
     <>
@@ -43,42 +66,51 @@ export default function Details(props) {
             <FontAwesomeIcon icon={faLocationDot} className="location-icon" />
             <div>
               <h1>
-                {props.weather.name}, {props.weather.country}
+                {weather.name}, {weather.country}
               </h1>
               <h3>{currentDate}</h3>
             </div>
           </div>
-          <button className="favourites-button">
-            <FontAwesomeIcon icon={faHeart} />
-            <span>Add to favourites</span>
+          <button
+            className={`favourites-button ${isFavorite ? "active" : ""}`}
+            onClick={handleFavoriteClick}
+          >
+            <FontAwesomeIcon
+              icon={faHeart}
+              style={{ color: isFavorite ? "#ff4d4d" : "" }}
+              className="favorites-icon"
+            />
+            <span>
+              {isFavorite ? "Remove from favourites" : "Add to favourites"}
+            </span>
           </button>
         </div>
         <div className="weather-details">
           <div className="temp-details">
             <img
               className="weather-temp-icon"
-              src={`https://openweathermap.org/img/wn/${props.weather.weatherIcon}@2x.png`}
+              src={`https://openweathermap.org/img/wn/${weather.weatherIcon}@2x.png`}
             />
             <div>
               <h2>
-                {Math.floor(props.weather.currentTemp)}
+                {Math.floor(weather.currentTemp)}
                 {symbols[unitSystem]}
               </h2>
-              <p className="weather-status">{props.weather.weatherStatus}</p>
+              <p className="weather-status">{weather.weatherStatus}</p>
             </div>
           </div>
           <div className="info-details">
             <div className="box-weather">
               <p>Clouds</p>
-              <span>{props.weather.clouds}%</span>
+              <span>{weather.clouds}%</span>
             </div>
             <div className="box-weather">
               <p>Wind</p>
-              <span>{windDirection(props.weather.windDeg)}</span>
+              <span>{windDirection(weather.windDeg)}</span>
             </div>
             <div className="box-weather">
               <p>Wind speed</p>
-              <span>{props.weather.windSpeed} km/h</span>
+              <span>{weather.windSpeed} km/h</span>
             </div>
           </div>
         </div>
@@ -88,7 +120,7 @@ export default function Details(props) {
             <p className="forecast-expect">Expected Conditions</p>
           </div>
           <div className="forecast-flex">
-            {props.weather.dailyWeather.slice(1, 6).map((day, index) => (
+            {weather.dailyWeather.slice(1, 6).map((day, index) => (
               <div key={index} className="forecast-day">
                 {new Date(day.dt * 1000).toLocaleDateString("en-US", {
                   weekday: "short",

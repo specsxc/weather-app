@@ -8,6 +8,9 @@ export default async function getWeatherData(location, api, units = "metric") {
       throw Error("Something went wrong");
     }
     const data = await res.json();
+    if (!data || data.length === 0) {
+      throw new Error("City not found!");
+    }
     const country = data[0].country;
     const name = data[0].name;
     const latitude = data[0].lat;
@@ -22,7 +25,6 @@ export default async function getWeatherData(location, api, units = "metric") {
         throw Error("Something went wrong");
       }
       const data2 = await res2.json();
-      console.log(data2);
       return {
         name: name,
         country: country,

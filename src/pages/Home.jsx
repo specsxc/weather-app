@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import "../App.css";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -13,20 +12,12 @@ export default function Home({ weather, location, setLocation }) {
     standard: " K",
   };
 
-  if (weather) {
-    console.log(weather);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const city = formData.get("city").toLowerCase().trim();
-    console.log(city);
     if (city !== "") {
       setLocation({ city: city });
-      console.log("Wysłano zapytanie o miasto:", city);
-    } else {
-      console.log("Błędna nazwa");
     }
   }
 
