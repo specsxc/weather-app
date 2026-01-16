@@ -56,7 +56,7 @@ export default function Favourites({ setLocation }) {
       {loading && <p>Updating weather data...</p>}
 
       {!loading && favouriteNames.length === 0 && (
-        <p>No favourites added yet. Type your city and click the heart!</p>
+        <p>No favourites added yet.</p>
       )}
 
       <div className="favourites-grid">
