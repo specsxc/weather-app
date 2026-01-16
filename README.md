@@ -16,7 +16,7 @@ Nowoczesna aplikacja pogodowa zbudowana w React, wykorzystująca Redux Toolkit d
 
 ## 🛠️ Technologie
 
-- React 18 (Vite)
+- React 19 (Vite)
 
 - Redux Toolkit (Global state management)
 
@@ -33,7 +33,7 @@ Nowoczesna aplikacja pogodowa zbudowana w React, wykorzystująca Redux Toolkit d
 ### Sklonuj repozytorium
 
 ```Bash
-git clone [https://github.com/specsxc/weather-app.git](https://github.com/specsxc/weather-app)
+git clone https://github.com/specsxc/weather-app.git
 ```
 
 ### Przejdź do folderu projektu
