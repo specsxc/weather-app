@@ -1,56 +1,63 @@
-# Simple Weather App
-
-Simple Weather App (React + Vite)
+# Simple Weather App (React + Vite)
 
 Nowoczesna aplikacja pogodowa zbudowana w React, wykorzystująca Redux Toolkit do zarządzania stanem oraz OpenWeather API do dostarczania danych w czasie rzeczywistym.
 
-🚀 Funkcje
-Wyszukiwanie miast: Dynamiczne pobieranie pogody dla dowolnego miejsca na świecie.
+## 🚀 Funkcje
 
-System Jednostek: Wybór między systemem metrycznym, imperialnym i naukowym (Kelvin), zapisywany w localStorage.
+- Wyszukiwanie miast: Dynamiczne pobieranie pogody dla dowolnego miejsca na świecie.
 
-Ulubione: Możliwość zapisywania miast do listy ulubionych zapisywany w localStorage.
+- System Jednostek: Wybór między systemem metrycznym, imperialnym i naukowym (Kelvin), zapisywany w localStorage.
 
-Szczegółowe dane: Prognoza na 5 dni, prędkość wiatru, zachmurzenie i aktualna data.
+- Ulubione: Możliwość zapisywania miast do listy ulubionych zapisywany w localStorage.
 
-Responsywność: Interfejs typu Dashboard z wygodnym paskiem bocznym.
+- Szczegółowe dane: Prognoza na 5 dni, prędkość wiatru, zachmurzenie i aktualna data.
 
-🛠️ Technologia
-React 18 (Vite)
+- Responsywność: Interfejs typu Dashboard z wygodnym paskiem bocznym.
 
-Redux Toolkit (Global state management)
+## 🛠️ Technologie
 
-React Router (Nawigacja)
+- React 18 (Vite)
 
-FontAwesome (Ikony)
+- Redux Toolkit (Global state management)
 
-CSS3 (Custom properties/Variables)
+- React Router (Nawigacja)
 
-OpenWeather One Call API 3.0 (Rzeczywiste dane)
+- FontAwesome (Ikony)
 
-📦 Instalacja i uruchomienie
-Sklonuj repozytorium:
+- CSS3 (Custom properties/Variables)
 
-Bash
+- OpenWeather One Call API 3.0 (Rzeczywiste dane)
 
+## 📦 Instalacja i uruchomienie
+
+### Sklonuj repozytorium
+
+```Bash
 git clone [https://github.com/specsxc/weather-app.git](https://github.com/specsxc/weather-app)
-Przejdź do folderu projektu:
+```
 
-Bash
+### Przejdź do folderu projektu
 
+```Bash
 cd weather-app
-Zainstaluj zależności:
+```
 
-Bash
+### Zainstaluj zależności
 
+```Bash
 npm install
-Utwórz plik .env w głównym katalogu i dodaj swój klucz API:
+```
 
-Fragment kodu
+### Utwórz plik .env w głównym katalogu i dodaj swój klucz API
 
+Klucz API możesz wygenerować na stronie [OpenWeatherMap](https://openweathermap.org/api).
+
+```env
 VITE_WEATHER_API_KEY=twoj_klucz_api
-Uruchom aplikację:
+```
 
-Bash
+### Uruchom aplikację
 
+```Bash
 npm run dev
+```
