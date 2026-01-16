@@ -11,7 +11,7 @@ export default function Favourites({ setLocation }) {
   const [favData, setFavData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const symbols = { metric: "°C", imperial: "°F", standard: "K" };
+  const symbols = { metric: "°C", imperial: "°F", standard: " K" };
 
   useEffect(() => {
     const fetchAll = async () => {

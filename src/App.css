@@ -49,6 +49,33 @@
   color: var(--text-color);
 }
 
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 12px;
+  color: #a0aec0;
+  text-decoration: none;
+}
+
+.sidebar-icon:hover {
+  color: #4299e1;
+  transform: scale(1.15);
+}
+
+.nav-link:hover {
+  color: #4facfe;
+  background-color: rgba(79, 172, 254, 0.1);
+}
+
+.nav-link.active {
+  color: #4facfe;
+  background-color: rgba(79, 172, 254, 0.15);
+  position: relative;
+}
+
 /* Home */
 
 main {
@@ -71,9 +98,17 @@ main {
   max-width: 800px;
 }
 
-.savedCitiesText {
+.last-city-text {
   color: var(--text-color-dark);
-  margin-bottom: 20px;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.saved-city-text {
+  color: var(--text-color-light);
+  margin-top: 35px;
   font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 2px;

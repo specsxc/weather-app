@@ -3,11 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const unitSlice = createSlice({
   name: "units",
   initialState: {
-    system: "metric",
+    system: localStorage.getItem("unitSystem") || "metric",
   },
   reducers: {
     setUnit: (state, action) => {
       state.system = action.payload;
+      localStorage.setItem("unitSystem", action.payload);
     },
   },
 });

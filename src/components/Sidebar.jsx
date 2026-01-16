@@ -15,14 +15,14 @@ export default function Sidebar() {
         <NavLink to="/" className="homeButton">
           <FontAwesomeIcon icon={faCloud} className="sidebar-home" />
         </NavLink>
-        <NavLink to="/">
+        <NavLink to="/" className="nav-link">
           <FontAwesomeIcon icon={faHouse} className="sidebar-icon" />
         </NavLink>
-        <NavLink to="/favourites">
+        <NavLink to="/favourites" className="nav-link">
           <FontAwesomeIcon icon={faHeart} className="sidebar-icon" />
         </NavLink>
       </div>
-      <NavLink to="/settings">
+      <NavLink to="/settings" className="nav-link">
         <FontAwesomeIcon icon={faGear} className="sidebar-icon" />
       </NavLink>
     </nav>
