@@ -2,21 +2,19 @@ import getWeatherData from "../services/getWeatherData";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { symbols } from "../utils/units";
 
-export default function Favourites({ setLocation }) {
-  const api = import.meta.env.VITE_WEATHER_API_KEY;
+export default function Favourites({ setLocation, api }) {
   const unitSystem = useSelector((state) => state.units.system);
   const favouriteNames = useSelector((state) => state.favorites.items);
 
   const [favData, setFavData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const symbols = { metric: "°C", imperial: "°F", standard: " K" };
-
   useEffect(() => {
     const fetchAll = async () => {
       const validCities = favouriteNames.filter(
-        (name) => typeof name === "string" && name.length > 0
+        (name) => typeof name === "string" && name.length > 0,
       );
 
       if (validCities.length === 0) {
@@ -27,7 +25,7 @@ export default function Favourites({ setLocation }) {
       setLoading(true);
       try {
         const promises = favouriteNames.map((city) =>
-          getWeatherData({ city: city }, api, unitSystem)
+          getWeatherData({ city: city }, api, unitSystem),
         );
         const results = await Promise.all(promises);
         setFavData(results.filter((res) => res !== null));
@@ -75,11 +73,11 @@ export default function Favourites({ setLocation }) {
               </div>
               <p className="weatherCurrent">
                 <img
-                  src={`https://openweathermap.org/img/wn/${weather.weatherIcon}@2x.png`}
-                  alt={weather.description}
+                  src={`https://openweathermap.org/img/wn/${weather.list[0].weather[0].icon}@2x.png`}
+                  alt={weather.list[0].weather[0].description}
                 />
                 <span>
-                  {Math.floor(weather.currentTemp)}
+                  {Math.round(weather.list[0].main.temp)}
                   {symbols[unitSystem]}
                 </span>
               </p>

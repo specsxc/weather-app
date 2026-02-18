@@ -5,12 +5,11 @@ import { toggleFavorite } from "../store/favoritesSlice";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { symbols } from "../utils/units";
 
-export default function Details({ weather, getWeatherData }) {
+export default function Details({ weather, getWeatherData, api }) {
   const location = useLocation();
   const cityFromFavorites = location.state?.cityName;
-
-  const api = import.meta.env.VITE_WEATHER_API_KEY;
 
   const unitSystem = useSelector((state) => state.units.system);
 
@@ -34,7 +33,7 @@ export default function Details({ weather, getWeatherData }) {
     }
   };
 
-  if (!weather || !weather.dailyWeather) {
+  if (!weather) {
     return <div className="loading">Fetching weather...</div>;
   }
 
@@ -46,11 +45,9 @@ export default function Details({ weather, getWeatherData }) {
     month: "long",
   });
 
-  const symbols = {
-    metric: "°C",
-    imperial: "°F",
-    standard: " K",
-  };
+  const dailyForecast = weather.list.filter((item) =>
+    item.dt_txt.includes("12:00:00"),
+  );
 
   function windDirection(deg) {
     const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
@@ -89,28 +86,31 @@ export default function Details({ weather, getWeatherData }) {
           <div className="temp-details">
             <img
               className="weather-temp-icon"
-              src={`https://openweathermap.org/img/wn/${weather.weatherIcon}@2x.png`}
+              src={`https://openweathermap.org/img/wn/${weather.list[0].weather[0].icon}@2x.png`}
+              alt={weather.list[0].weather[0].description}
             />
             <div>
               <h2>
-                {Math.floor(weather.currentTemp)}
+                {Math.round(weather.list[0].main.temp)}
                 {symbols[unitSystem]}
               </h2>
-              <p className="weather-status">{weather.weatherStatus}</p>
+              <p className="weather-status">
+                {weather.list[0].weather[0].main}
+              </p>
             </div>
           </div>
           <div className="info-details">
             <div className="box-weather">
               <p>Clouds</p>
-              <span>{weather.clouds}%</span>
+              <span>{weather.list[0].clouds.all}%</span>
             </div>
             <div className="box-weather">
               <p>Wind</p>
-              <span>{windDirection(weather.windDeg)}</span>
+              <span>{windDirection(weather.list[0].wind.deg)}</span>
             </div>
             <div className="box-weather">
               <p>Wind speed</p>
-              <span>{weather.windSpeed} km/h</span>
+              <span>{Math.round(weather.list[0].wind.speed)} km/h</span>
             </div>
           </div>
         </div>
@@ -120,21 +120,23 @@ export default function Details({ weather, getWeatherData }) {
             <p className="forecast-expect">Expected Conditions</p>
           </div>
           <div className="forecast-flex">
-            {weather.dailyWeather.slice(1, 6).map((day, index) => (
+            {dailyForecast.map((day, index) => (
               <div key={index} className="forecast-day">
                 {new Date(day.dt * 1000).toLocaleDateString("en-US", {
                   weekday: "short",
+                  hour: "numeric",
                 })}
                 <img
                   src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                  alt={day.weather[0].description}
                 />
                 <div className="forecast-min-max">
                   <h3>
-                    {Math.floor(day.temp.max)}
+                    {Math.round(day.main.temp_max)}
                     {symbols[unitSystem]}
                   </h3>
                   <p>
-                    {Math.floor(day.temp.min)}
+                    {Math.round(day.main.temp_min)}
                     {symbols[unitSystem]}
                   </p>
                 </div>

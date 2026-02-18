@@ -45,12 +45,16 @@ export default function App() {
           />
           <Route
             path="/favourites"
-            element={<Favourites setLocation={setLocation} />}
+            element={<Favourites setLocation={setLocation} api={API_KEY} />}
           />
           <Route
             path="/details"
             element={
-              <Details weather={weather} getWeatherData={getWeatherData} />
+              <Details
+                weather={weather}
+                getWeatherData={getWeatherData}
+                api={API_KEY}
+              />
             }
           />
           <Route path="/settings" element={<Settings />} />

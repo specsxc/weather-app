@@ -2,15 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { symbols } from "../utils/units";
 
 export default function Home({ weather, location, setLocation }) {
   const unitSystem = useSelector((state) => state.units.system);
-
-  const symbols = {
-    metric: "°C",
-    imperial: "°F",
-    standard: " K",
-  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -36,8 +31,8 @@ export default function Home({ weather, location, setLocation }) {
           />
         </form>
       </div>
-      {location.city && <p className="last-city-text">Last city</p>}
-      {location.city && (
+      {location.city && weather && <p className="last-city-text">Last city</p>}
+      {location.city && weather && (
         <NavLink to="/details" className="cityDetails">
           <div className="city">
             <div>
@@ -46,10 +41,11 @@ export default function Home({ weather, location, setLocation }) {
             </div>
             <p className="weatherCurrent">
               <img
-                src={`https://openweathermap.org/img/wn/${weather.weatherIcon}@2x.png`}
+                src={`https://openweathermap.org/img/wn/${weather.list[0].weather[0].icon}@2x.png`}
+                alt={weather.list[0].weather[0].description}
               />
               <span>
-                {Math.floor(weather.currentTemp)}
+                {Math.round(weather.list[0].main.temp)}
                 {symbols[unitSystem]}
               </span>
             </p>
