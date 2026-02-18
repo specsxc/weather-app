@@ -26,7 +26,7 @@ Nowoczesna aplikacja pogodowa zbudowana w React, wykorzystująca Redux Toolkit d
 
 - CSS3 (Custom properties/Variables)
 
-- OpenWeather One Call API 3.0 (Rzeczywiste dane)
+- OpenWeatherMap 5 day / 3 hour forecast data (Rzeczywiste dane)
 
 ## 📦 Instalacja i uruchomienie
 
